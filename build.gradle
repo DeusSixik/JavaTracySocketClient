@@ -5,6 +5,14 @@ plugins {
 group = 'dev.sdm'
 version = '0.12.2'
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+
+    withSourcesJar()
+}
+
 repositories {
     mavenCentral()
 }
@@ -17,4 +25,15 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Built-By': System.getProperty('user.name'),
+                'Build-Java-Version': JavaVersion.current()
+        )
+    }
 }
