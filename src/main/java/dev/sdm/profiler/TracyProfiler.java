@@ -7,9 +7,14 @@ import dev.sdm.profiler.events.StartZoneEvent;
 import dev.sdm.profiler.network.TcpClient;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.function.Consumer;
 
 public class TracyProfiler {
+
+    public static void setConnectionIp(String ip) {
+        TcpClient.IPConnection = ip;
+    }
 
     public static void startConnection() throws Exception {
         TcpClient.tryConnect();
@@ -17,6 +22,14 @@ public class TracyProfiler {
 
     public static void disconnect() throws Exception {
         TcpClient.disconnect();
+    }
+
+    public static boolean isConnected() {
+       return TcpClient.isConnected();
+    }
+
+    public static Socket connectionSocket() {
+        return TcpClient.getSocket();
     }
 
     public static void markFrame() {

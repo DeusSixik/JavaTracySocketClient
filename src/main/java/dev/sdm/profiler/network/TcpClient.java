@@ -60,8 +60,15 @@ public class TcpClient {
         MessagesQueue.add(message);
     }
 
+    public static boolean isConnected() {
+        return socket != null && socket.isConnected();
+    }
+
     public static void disconnect() throws IOException {
-        if(socket != null && socket.isConnected())
-            socket.close();
+        if(isConnected()) socket.close();
+    }
+
+    public static Socket getSocket() {
+        return socket;
     }
 }
